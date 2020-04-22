@@ -3,13 +3,12 @@ import ApiService from "../lib/service.js";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-export const ListTodo = () => {
+export const ListTodo = (props) => {
   const [data, setData] = useState([]);
   const [updateState, setUpdateState] = useState(true);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-
-  //   const [done, setdone] = useState(false)
+  const [done, setDone] = useState(false);
 
   useEffect(() => {
     ApiService.get_todos().then((apiResponse) => {
@@ -30,37 +29,53 @@ export const ListTodo = () => {
   };
 
   async function handleFormSubmit(event) {
-
     event.preventDefault();
-    
+
     try {
       await axios.post("http://localhost:4000/api/v1/todos", { title, body });
       // await (ApiService.new_todo(), { title, body });
       setTitle("");
       setBody("");
       setUpdateState(!updateState);
-
     } catch (error) {
       console.log(error);
       setUpdateState(!updateState);
-
     }
+  }
+
+  function doneHandler() {
+    done
+      ? ApiService.remove_from_done(props.match.params.id)
+      : ApiService.mark_as_done(props.match.params.id);
+    setDone(!done);
   }
 
   return (
     <div>
       <h1>ToDo List</h1>
+
       {data.map((singleTodo) => {
         return (
-          <div key={singleTodo._id}>
-            <h2>{singleTodo.title}</h2>
-            <h3>{singleTodo.body}</h3>
-            <button
-              onClick={() => delete_todo(singleTodo._id)}
-              className="btn btn-sm btn-danger"
-            >
-              Delete
-            </button>
+          <div key={singleTodo._id} className="card">
+            <div className="card">
+              <div className="card-body">
+                <h4 className="card-title">{singleTodo.title}</h4>
+                <p className="card-text">{singleTodo.body}</p>
+                <div>
+                  {singleTodo.done ? (
+                    <button onCLick={doneHandler} className="btn btn-sm btn-success">done</button>
+                  ) : (
+                    <span className="btn btn-sm btn-warning">not yet done</span>
+                  )}
+                  <button
+                    onClick={() => delete_todo(singleTodo._id)}
+                    className="mx-2 btn btn-sm btn-danger"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         );
       })}

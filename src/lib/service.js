@@ -20,6 +20,12 @@ class apiService {
     return this.auth.delete(`/todos/${id}`);
   }
 
+  remove_from_done(id) {
+    return this.auth.delete(`/todos/${id}`);
+  }
+
+
+
 //   addToWishlist(id) {
 //     return this.auth.post(`/products/addtowishlist/${id}`);
 //   }
