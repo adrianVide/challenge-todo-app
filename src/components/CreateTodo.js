@@ -4,10 +4,12 @@ import axios from "axios";
 import { useState } from "react";
 
 export const CreateTodo = () => {
+
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
   async function handleFormSubmit(event) {
+    
     event.preventDefault();
     console.log(title);
     console.log(body);
