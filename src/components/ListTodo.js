@@ -16,7 +16,7 @@ export const ListTodo = () => {
         setData(apiResponse.data);
       }
     });
-  }, []);
+  }, [updateState]);
   const delete_todo = (id) => {
     ApiService.delete_todo(id).then((responseFromAPI) => {
       // console.log(responseFromAPI)
@@ -35,8 +35,8 @@ export const ListTodo = () => {
             <h3>{singleTodo.body}</h3>
             <button
               onClick={() => delete_todo(singleTodo._id)}
-              //   className="btn btn-sm btn-danger"
-            ></button>
+                className="btn btn-sm btn-danger"
+            >Delete</button>
           </div>
         );
       })}

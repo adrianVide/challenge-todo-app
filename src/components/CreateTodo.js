@@ -9,7 +9,7 @@ export const CreateTodo = () => {
   const [body, setBody] = useState("");
 
   async function handleFormSubmit(event) {
-    
+
     event.preventDefault();
     console.log(title);
     console.log(body);
@@ -26,6 +26,7 @@ export const CreateTodo = () => {
 
   return (
     <div>
+    <h1>Add a new Task</h1>
       <div className="d-flex justify-content-center">
         <form
           className="d-flex flex-column justify-content-center text-center align-items-center"
