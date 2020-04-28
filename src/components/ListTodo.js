@@ -43,12 +43,12 @@ export const ListTodo = (props) => {
     }
   }
 
-  function doneHandler() {
-    done
-      ? ApiService.remove_from_done(props.match.params.id)
-      : ApiService.mark_as_done(props.match.params.id);
-    setDone(!done);
+  async function doneHandler(id) {
+    ApiService.done_handler(id);
+
+    await setUpdateState(!updateState);
   }
+
 
   return (
     <div>
@@ -63,9 +63,19 @@ export const ListTodo = (props) => {
                 <p className="card-text">{singleTodo.body}</p>
                 <div>
                   {singleTodo.done ? (
-                    <button onCLick={doneHandler} className="btn btn-sm btn-success">done</button>
+                    <button
+                      onClick={() => doneHandler(singleTodo)}
+                      className="btn btn-sm btn-success"
+                    >
+                      done
+                    </button>
                   ) : (
-                    <span className="btn btn-sm btn-warning">not yet done</span>
+                    <span
+                      onClick={() => doneHandler(singleTodo)}
+                      className="btn btn-sm btn-warning"
+                    >
+                      not yet done
+                    </span>
                   )}
                   <button
                     onClick={() => delete_todo(singleTodo._id)}
