@@ -13,7 +13,7 @@ export const ListTodo = (props) => {
   useEffect(() => {
     ApiService.get_todos().then((apiResponse) => {
       //   console.log(apiResponse);
-      console.log(apiResponse.data);
+      // console.log(apiResponse.data);
       if (apiResponse.data.length) {
         setData(apiResponse.data);
       }
@@ -49,72 +49,89 @@ export const ListTodo = (props) => {
     await setUpdateState(!updateState);
   }
 
-
   return (
     <div>
       <h1>ToDo List</h1>
+      <div className="row container">
+        <div className="col s12 l5 m6 ">
+          <h1>Add a new Task</h1>
+          <div className="d-flex justify-content-center">
+            <form
+              className="d-flex flex-column justify-content-center text-center align-items-center"
+              onSubmit={handleFormSubmit}
+            >
+              <label>Title:</label>
+              <input
+                type="text"
+                name="title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+              <label>Body:</label>
+              <input
+                type="text"
+                name="body"
+                value={body}
+                onChange={(e) => setBody(e.target.value)}
+              />
 
-      {data.map((singleTodo) => {
-        return (
-          <div key={singleTodo._id} className="card">
-            <div className="card">
-              <div className="card-body">
-                <h4 className="card-title">{singleTodo.title}</h4>
-                <p className="card-text">{singleTodo.body}</p>
-                <div>
+              <input type="submit" value="Submit" />
+            </form>
+          </div>
+        </div>
+      {/* <div className="row">
+        <div className="col s12 m6 l4 xl4"> */}
+      <div className="col s12 l7 m6 ">
+        {data.map((singleTodo) => {
+          return (
+            <div className="card" key={singleTodo.id}>
+              <div className="card-image">
+                <img src={`https://loremflickr.com/320/180/coding?random={singleTodo.title}`} />
+                <span className="card-title">{singleTodo.title}</span>
+                <a className="btn-floating halfway-fab waves-effect waves-light">
                   {singleTodo.done ? (
-                    <button
-                      onClick={() => doneHandler(singleTodo)}
-                      className="btn btn-sm btn-success"
-                    >
-                      done
-                    </button>
+                    <div>
+                      <p>
+                        <label>
+                          <input
+                            onClick={() => doneHandler(singleTodo)}
+                            type="checkbox"
+                          />
+                          <span>Done</span>
+                        </label>
+                      </p>
+                    </div>
                   ) : (
-                    <span
-                      onClick={() => doneHandler(singleTodo)}
-                      className="btn btn-sm btn-warning"
-                    >
-                      not yet done
-                    </span>
+                    <div>
+                      <p>
+                        <label>
+                          <input
+                            onClick={() => doneHandler(singleTodo)}
+                            type="checkbox"
+                          />
+                          <span>To be done</span>
+                        </label>
+                      </p>
+                    </div>
                   )}
-                  <button
-                    onClick={() => delete_todo(singleTodo._id)}
-                    className="mx-2 btn btn-sm btn-danger"
-                  >
-                    Delete
-                  </button>
-                </div>
+                </a>
+              </div>
+              <div className="card-content">
+                <p>{singleTodo.body}</p>
+                <button
+                  onClick={() => delete_todo(singleTodo._id)}
+                  className="waves-effect waves-light btn-small red"
+                >
+                  Delete
+                </button>
               </div>
             </div>
-          </div>
-        );
-      })}
-      <div>
-        <h1>Add a new Task</h1>
-        <div className="d-flex justify-content-center">
-          <form
-            className="d-flex flex-column justify-content-center text-center align-items-center"
-            onSubmit={handleFormSubmit}
-          >
-            <label>Title:</label>
-            <input
-              type="text"
-              name="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-            <label>Body:</label>
-            <input
-              type="text"
-              name="body"
-              value={body}
-              onChange={(e) => setBody(e.target.value)}
-            />
-
-            <input type="submit" value="Submit" />
-          </form>
-        </div>
+          );
+        })}
       </div>
+      </div>
+
+      {/* </div> */}
     </div>
   );
 };
