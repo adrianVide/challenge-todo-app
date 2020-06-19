@@ -53,7 +53,7 @@ export const ListTodo = (props) => {
     <div>
       <h1>ToDo List</h1>
       <div className="row container">
-        <div className="col s12 l5 m6 ">
+        <div className="col s12 l4 m4 ">
           <h1>Add a new Task</h1>
           <div className="d-flex justify-content-center">
             <form
@@ -75,20 +75,37 @@ export const ListTodo = (props) => {
                 onChange={(e) => setBody(e.target.value)}
               />
 
-              <input type="submit" value="Submit" />
+              <button
+                type="submit"
+                value="Add task"
+                class="btn-floating btn-large"
+              >
+                <i class="material-icons">add</i>
+              </button>
             </form>
           </div>
         </div>
-      {/* <div className="row">
+        {/* <div className="row">
         <div className="col s12 m6 l4 xl4"> */}
-      <div className="col s12 l7 m6 ">
-        {data.map((singleTodo) => {
-          return (
-            <div className="card" key={singleTodo.id}>
-              <div className="card-image">
-                <img src={`https://loremflickr.com/320/180/coding?random={singleTodo.title}`} />
-                <span className="card-title">{singleTodo.title}</span>
-                <a className="btn-floating halfway-fab waves-effect waves-light">
+        <div className="col s12 l8 m8 row">
+          {data.map((singleTodo) => {
+            return (
+              <div className="card-horizontal col m6 s12 l6 xl6" key={singleTodo.id}>
+                <div className="card-image">
+                  <img
+                    src={`https://loremflickr.com/320/180/${singleTodo.title}`}
+                  />
+                  <span className="card-title">{singleTodo.title}</span>
+                  <a className="btn-floating halfway-fab waves-effect waves-light"></a>
+                </div>
+                <div className="card-content">
+                  <p>{singleTodo.body}</p>
+                  <button
+                    onClick={() => delete_todo(singleTodo._id)}
+                    className="waves-effect waves-light btn-small red"
+                  >
+                    Delete
+                  </button>
                   {singleTodo.done ? (
                     <div>
                       <p>
@@ -114,21 +131,11 @@ export const ListTodo = (props) => {
                       </p>
                     </div>
                   )}
-                </a>
+                </div>
               </div>
-              <div className="card-content">
-                <p>{singleTodo.body}</p>
-                <button
-                  onClick={() => delete_todo(singleTodo._id)}
-                  className="waves-effect waves-light btn-small red"
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
       </div>
 
       {/* </div> */}
