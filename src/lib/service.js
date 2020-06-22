@@ -3,7 +3,7 @@ import axios from "axios";
 class apiService {
   constructor() {
     this.auth = axios.create({
-      baseURL: "http://localhost:4000/api/v1",
+      baseURL: "http://localhost:4012/api/v1",
       withCredentials: true,
     });
   }
@@ -11,7 +11,7 @@ class apiService {
   get_todos() {
     return this.auth.get("/todos");
   }
-  
+
   new_todo() {
     return this.auth.post("/todos");
   }
@@ -21,14 +21,11 @@ class apiService {
   }
 
   done_handler(object) {
-    
-    const toDoID = object._id
-    const toDoDone = object.done
+    const toDoID = object._id;
+    const toDoDone = object.done;
     // console.log('etsoy en service!', object.toDoID, object.toDoDone);
-    return this.auth.put(`/todos/done/${toDoID}`,{toDoDone});
+    return this.auth.put(`/todos/done/${toDoID}`, { toDoDone });
   }
-
-
 }
 
 const ApiService = new apiService();
