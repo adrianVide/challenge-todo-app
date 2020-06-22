@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import { ListTodo } from './components/ListTodo';
 
 

@@ -1,0 +1,21 @@
+html {
+  background-color: azure;
+}
+
+.inline {
+  display: inline-block;
+  margin: 5px;
+}
+
+h1 {
+  text-align: center;
+  color: grey;
+}
+h5 {
+  /* text-align: center; */
+  color: grey;
+}
+
+.margin-top {
+  margin-top: 100px;
+}

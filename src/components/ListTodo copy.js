@@ -52,128 +52,98 @@ export const ListTodo = (props) => {
   return (
     <div>
       <h1>ToDo List</h1>
-
-    
-      {data.map((singleTodo) => {
-        return (
-          <div >
-            <div className="row">
-              <div className="col s12 m6">
-                <div className="card" key={singleTodo.id}>
-                  <div className="card-image">
-                    <img src="images/sample-1.jpg" />
-                    <span className="card-title">Card Title</span>
-                    <a className="btn-floating halfway-fab waves-effect waves-light red">
-                      {singleTodo.done ? (
-                <div>
-                  <p>
-                    <label>
-                      <input
-                        onClick={() => doneHandler(singleTodo)}
-                        type="checkbox"
-                      />
-                      <span>Done</span>
-                    </label>
-                  </p>
-                </div>
-              ) : (
-                <div>
-                  <p>
-                    <label>
-                      <input
-                        onClick={() => doneHandler(singleTodo)}
-                        type="checkbox"
-                      />
-                      <span>To be done</span>
-                    </label>
-                  </p>
-                </div>
-              )}
-                    </a>
-                  </div>
-                  <div className="card-content">
-                    <p>
-                      I am a very simple card. I am good at containing small
-                      bits of information. I am convenient because I require
-                      little markup to use effectively.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <li className="collection-item avatar">
-              <img src="" className="circle" alt="" />
-              <span className="title">Title</span>
-              <p>
-                First Line <br />
-                Second Line
-              </p>
+      <div className="row container">
+        <div className="col s12 l4 m4 ">
+          <h1>Add a new Task</h1>
+          <div className="d-flex justify-content-center">
+            <form
+              className="d-flex flex-column justify-content-center text-center align-items-center"
+              onSubmit={handleFormSubmit}
+            >
+              <label>Title:</label>
+              <input
+                type="text"
+                name="title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+              <label>Body:</label>
+              <input
+                type="text"
+                name="body"
+                value={body}
+                onChange={(e) => setBody(e.target.value)}
+              />
 
               <button
-                onClick={() => delete_todo(singleTodo._id)}
-                className="btn-floating btn-large waves-effect waves-light red"
+                type="submit"
+                value="Add task"
+                class="btn-floating btn-large"
               >
-                Delete
+                <i class="material-icons">add</i>
               </button>
-              <a href="#!" className="secondary-content">
-                <i className="material-icons">grade</i>
-              </a>
-              {singleTodo.done ? (
-                <div>
-                  <p>
-                    <label>
-                      <input
-                        onClick={() => doneHandler(singleTodo)}
-                        type="checkbox"
-                      />
-                      <span>Done</span>
-                    </label>
-                  </p>
-                </div>
-              ) : (
-                <div>
-                  <p>
-                    <label>
-                      <input
-                        onClick={() => doneHandler(singleTodo)}
-                        type="checkbox"
-                      />
-                      <span>To be done</span>
-                    </label>
-                  </p>
-                </div>
-              )}
-            </li>
+            </form>
           </div>
-        );
-      })}
-      <div>
-        <h1>Add a new Task</h1>
-        <div className="d-flex justify-content-center">
-          <form
-            className="d-flex flex-column justify-content-center text-center align-items-center"
-            onSubmit={handleFormSubmit}
-          >
-            <label>Title:</label>
-            <input
-              type="text"
-              name="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-            <label>Body:</label>
-            <input
-              type="text"
-              name="body"
-              value={body}
-              onChange={(e) => setBody(e.target.value)}
-            />
-
-            <input type="submit" value="Submit" />
-          </form>
+        </div>
+        {/* <div className="row">
+        <div className="col s12 m6 l4 xl4"> */}
+        <div className="col s12 l8 m8 row">
+          {data.map((singleTodo) => {
+            return (<li class="collection-item avatar">
+      <img src={`https://loremflickr.com/320/180/${singleTodo.title}`} alt="" class="circle"/>
+      <span class="title">{singleTodo.title}</span>
+      <p>{singleTodo.body}
+      </p>
+      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    </li>
+              
+              <div className="card col m6 s12 l6 xl6" key={singleTodo.id}>
+                <div className="card-image">
+                  <img
+                    src={`https://loremflickr.com/320/180/${singleTodo.title}`}
+                  />
+                  <span className="card-title">{singleTodo.title}</span>
+                </div>
+                <div className="card-content">
+                  <p>{singleTodo.body}</p>
+                  <button
+                    onClick={() => delete_todo(singleTodo._id)}
+                    className="waves-effect waves-light btn-small red"
+                  >
+                    Delete
+                  </button>
+                  {singleTodo.done ? (
+                    <div>
+                      <p>
+                        <label>
+                          <input
+                            onClick={() => doneHandler(singleTodo)}
+                            type="checkbox"
+                          />
+                          <span>Done</span>
+                        </label>
+                      </p>
+                    </div>
+                  ) : (
+                    <div>
+                      <p>
+                        <label>
+                          <input
+                            onClick={() => doneHandler(singleTodo)}
+                            type="checkbox"
+                          />
+                          <span>To be done</span>
+                        </label>
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
+
     </div>
   );
 };

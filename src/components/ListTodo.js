@@ -51,10 +51,10 @@ export const ListTodo = (props) => {
 
   return (
     <div>
-      <h1>ToDo List</h1>
-      <div className="row container">
-        <div className="col s12 l4 m4 ">
-          <h1>Add a new Task</h1>
+      <h1 className='text-center'>ToDo List</h1>
+      <div className="container">
+        <div className="margin-top container col s12 l12 m4 xl5">
+          <h5>Add a new Task</h5>
           <div className="d-flex justify-content-center">
             <form
               className="d-flex flex-column justify-content-center text-center align-items-center"
@@ -87,58 +87,69 @@ export const ListTodo = (props) => {
         </div>
         {/* <div className="row">
         <div className="col s12 m6 l4 xl4"> */}
-        <div className="col s12 l8 m8 row">
+        <div className="col s12 l5 m8 row margin-top">
           {data.map((singleTodo) => {
             return (
-              <div className="card-horizontal col m6 s12 l6 xl6" key={singleTodo.id}>
-                <div className="card-image">
-                  <img
-                    src={`https://loremflickr.com/320/180/${singleTodo.title}`}
-                  />
-                  <span className="card-title">{singleTodo.title}</span>
-                  <a className="btn-floating halfway-fab waves-effect waves-light"></a>
-                </div>
-                <div className="card-content">
-                  <p>{singleTodo.body}</p>
-                  <button
-                    onClick={() => delete_todo(singleTodo._id)}
-                    className="waves-effect waves-light btn-small red"
-                  >
-                    Delete
-                  </button>
-                  {singleTodo.done ? (
+              <div>
+                <ul className="collection">
+                  <li className="collection-item avatar">
+                    <img
+                      src={`https://loremflickr.com/320/180/${singleTodo.title}`}
+                      alt=""
+                      className="circle responsive-img"
+                    />
+                    <span className="title">{singleTodo.title}</span>
+                    <p>{singleTodo.body}</p>
+                    {/* <a href="#!" className="secondary-content">
+                      <i className="material-icons">grade</i>
+                    </a> */}
                     <div>
-                      <p>
-                        <label>
-                          <input
-                            onClick={() => doneHandler(singleTodo)}
-                            type="checkbox"
-                          />
-                          <span>Done</span>
-                        </label>
-                      </p>
+                      <span>
+                        <button
+                          onClick={() => delete_todo(singleTodo._id)}
+                          className="waves-effect waves-light btn-small red inline"
+                        >
+                          Delete
+                        </button>
+                      </span>
+                      <span>
+                        <form
+                          onChange={() => doneHandler(singleTodo)}
+                          action=""
+                          className="inline"
+                        >
+                          <p>
+                            <label>
+                              {singleTodo.done ? (
+                                <div>
+                                  <input
+                                    // onClick={() => doneHandler(singleTodo)}
+                                    type="checkbox"
+                                    checked="checked"
+                                  />
+                                  <span>Done</span>
+                                </div>
+                              ) : (
+                                <div>
+                                  <input
+                                    // onClick={() => doneHandler(singleTodo)}
+                                    type="checkbox"
+                                  />
+                                  <span>To be done</span>
+                                </div>
+                              )}
+                            </label>
+                          </p>
+                        </form>
+                      </span>
                     </div>
-                  ) : (
-                    <div>
-                      <p>
-                        <label>
-                          <input
-                            onClick={() => doneHandler(singleTodo)}
-                            type="checkbox"
-                          />
-                          <span>To be done</span>
-                        </label>
-                      </p>
-                    </div>
-                  )}
-                </div>
+                  </li>
+                </ul>
               </div>
             );
           })}
         </div>
       </div>
-
-      {/* </div> */}
     </div>
   );
 };
