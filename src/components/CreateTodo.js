@@ -15,7 +15,7 @@ export const CreateTodo = () => {
     console.log(body);
 
     try {
-      await axios.post("http://localhost:4000/api/v1/todos", { title, body })
+      await axios.post("https://todo.adrianvp.com/api/v1/todos", { title, body })
       // await (ApiService.new_todo(), { title, body });
       setTitle("");
       setBody("");
